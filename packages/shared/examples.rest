@@ -1,0 +1,49 @@
+### Cria uma nova aula
+POST http://localhost:3333/classes HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Rafael Arantes",
+  "avatar": "https://avatars1.githubusercontent.com/u/19666564?s=460&u=0c5de999726b91cd952737d4a24cefb7f310eda4&v=4",
+  "whatsapp": "16991690953",
+  "bio": "CTO da R Arantes Programação",
+  "subject": "Matemática",
+  "cost": "80",
+  "schedule": [{
+    "week_day": 1,
+    "from": "8:00",
+    "to": "12:00"
+  }, {
+    "week_day": 3,
+    "from": "10:00",
+    "to": "18:00"
+  }, {
+    "week_day": 4,
+    "from": "8:00",
+    "to": "12:00"
+  }]
+}
+
+## Busca aulas que atendem o filtro
+### Retorna um registro caso o POST já tenha sido executado
+GET http://localhost:3333/classes?week_day=1&subject=Matemática&time=9:00 HTTP/1.1
+### Retorna vazio por não ter nesse dia
+GET http://localhost:3333/classes?week_day=0&subject=Matemática&time=9:00 HTTP/1.1
+### Retorna vázio por não ter nessa matéria
+GET http://localhost:3333/classes?week_day=1&subject=Física&time=9:00 HTTP/1.1
+### Retorna vázio por não ter nessa hora
+GET http://localhost:3333/classes?week_day=0&subject=Matemática&time=12:00 HTTP/1.1
+### Retorna erro por não ter filtros
+GET http://localhost:3333/classes HTTP/1.1
+
+# Conexões
+### Cria uma nova conexão
+POST http://localhost:3333/connections HTTP/1.1
+content-type: application/json
+
+{
+  "user_id": 1
+}
+
+### Lista as conexões
+GET http://localhost:3333/connections HTTP/1.1
