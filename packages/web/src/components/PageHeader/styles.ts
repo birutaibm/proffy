@@ -51,7 +51,7 @@ export const Content = styled.div`
       max-width: 350px;
     }
   }
-
+  
   @media (min-width: 700px) {
     flex: 1;
     max-width: 740px;

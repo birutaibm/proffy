@@ -4,28 +4,38 @@ import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
 
 import { Container } from './styles';
 
-const Teacher: React.FC = () => {
+export interface Props {
+  id: number;
+  name: string;
+  avatar: string;
+  bio: string;
+  cost: number;
+  subject: string;
+  whatsapp: string;
+}
+
+const Teacher: React.FC<Props> = (data) => {
   return (
     <Container>
       <header>
-        <img src="https://avatars1.githubusercontent.com/u/19666564?s=460&u=0c5de999726b91cd952737d4a24cefb7f310eda4&v=4" alt="Foto"/>
+        <img src={data.avatar} alt="Foto"/>
         <div>
-          <strong>Rafael Arantes</strong>
-          <span>Matemática</span>
+          <strong>{data.name}</strong>
+          <span>{data.subject}</span>
         </div>
       </header>
       <p>
-        blevers....
+        {data.bio}
       </p>
       <footer>
         <p>
           Preço/hora
-          <strong>R$ 80,00</strong>
+          <strong>R$ {data.cost}</strong>
         </p>
-        <button type="button">
+        <a href={`https://wa.me/${data.whatsapp}`} target="blanck">
           <img src={whatsappIcon} alt="whatsapp"/>
           Entrar em contato
-        </button>
+        </a>
       </footer>
     </Container>
   );

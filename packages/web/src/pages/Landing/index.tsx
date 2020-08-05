@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { GetConnectionsResponseDTO } from '@proffy/shared/apiDTOs';
 
 import logoImg from '../../assets/images/logo.svg';
 import landingImg from '../../assets/images/landing.svg';
 import studyIcon from '../../assets/images/icons/study.svg';
 import giveClassIcon from '../../assets/images/icons/give-classes.svg';
 import purpleHeartIcon from '../../assets/images/icons/purple-heart.svg';
+import api from '../../services/api';
 
 import { Container, Content, LogoContainer, HeroImage, ButtonsContainer, TotalConnections } from './styles';
 
 const Landing: React.FC = () => {
+  const [connections, setConnections] = useState(0);
+
+  useEffect(() => {
+    api.get<GetConnectionsResponseDTO>('/connections').then(response => {
+      setConnections(response.data.total);
+    });
+  }, []);
+
   return (
     <Container>
       <Content className="container">
@@ -32,7 +42,8 @@ const Landing: React.FC = () => {
         </ButtonsContainer>
 
         <TotalConnections>
-          Total de 200 conexões já realizadas <img src={purpleHeartIcon} alt=""/>
+          Total de {connections} conexões já realizadas
+          <img src={purpleHeartIcon} alt=""/>
         </TotalConnections>
       </Content>
     </Container>
