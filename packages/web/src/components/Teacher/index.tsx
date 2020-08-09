@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
+import api from '../../services/api';
 
 import { Container } from './styles';
 
@@ -15,6 +16,10 @@ export interface Props {
 }
 
 const Teacher: React.FC<Props> = (data) => {
+  const createNewConnection = useCallback(() => {
+    api.post('connections', { user_id: data.id });
+  }, [data.id]);
+
   return (
     <Container>
       <header>
@@ -32,7 +37,11 @@ const Teacher: React.FC<Props> = (data) => {
           Preço/hora
           <strong>R$ {data.cost}</strong>
         </p>
-        <a href={`https://wa.me/${data.whatsapp}`} target="blanck">
+        <a
+          onClick={createNewConnection}
+          href={`https://wa.me/${data.whatsapp}`}
+          target="blanck"
+        >
           <img src={whatsappIcon} alt="whatsapp"/>
           Entrar em contato
         </a>

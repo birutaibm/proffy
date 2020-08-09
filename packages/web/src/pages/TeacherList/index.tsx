@@ -15,18 +15,6 @@ const TeacherList: React.FC = () => {
   const [teachers, setTeachers] = useState([]);
 
   const searchTeachers = useCallback(() => {
-    // const query: string[] = [];
-    // if (subject.length) {
-    //   query.push(`subject=${subject}`);
-    // }
-    // if (weekDay.length) {
-    //   query.push(`week_day=${weekDay}`);
-    // }
-    // if (time.length) {
-    //   query.push(`time=${time}`);
-    // }
-    // const queryParams = query.length ? `?${query.join('&')}` : '';
-    // api.get(`classes${queryParams}`)
     api.get('classes', {
       params: { subject, time, week_day: weekDay }
     }).then(
